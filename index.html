@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="el">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Απόδοση Ακινήτου</title>
+<title>Απόδοση Ακινήτου | G. Gkaripis</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -44,15 +43,6 @@
     overflow: hidden;
   }
 
-  header::before {
-    content: '';
-    position: absolute;
-    top: -40px; right: -40px;
-    width: 160px; height: 160px;
-    background: rgba(245,166,35,0.08);
-    border-radius: 50%;
-  }
-
   header::after {
     content: '';
     position: absolute;
@@ -68,7 +58,6 @@
     color: var(--gold);
     margin-bottom: 6px;
     font-weight: 600;
-    position: relative;
   }
 
   header h1 {
@@ -76,16 +65,14 @@
     font-size: 2.1rem;
     color: var(--white);
     line-height: 1.15;
-    position: relative;
   }
 
   header h1 span { color: var(--gold); }
 
   header p {
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.7);
     font-size: 0.8rem;
     margin-top: 6px;
-    position: relative;
   }
 
   /* CARDS */
@@ -149,18 +136,9 @@
     font-size: 0.95rem;
     font-weight: 600;
     outline: none;
-    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
-    -moz-appearance: textfield;
-  }
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
-  input[type=number]:focus {
-    border-color: var(--royal);
-    box-shadow: 0 0 0 3px rgba(37,99,184,0.1);
-    background: white;
   }
 
-  /* TOGGLE */
+  /* TOGGLE & BOXES */
   .toggle-row {
     display: flex;
     align-items: center;
@@ -168,11 +146,11 @@
     background: var(--bg);
     border-radius: 8px;
     padding: 10px 14px;
-    margin-bottom: 16px;
-    gap: 12px;
+    margin-bottom: 8px;
+    margin-top: 8px;
   }
 
-  .toggle-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+  .toggle-label { font-size: 0.8rem; color: var(--navy); font-weight: 600; }
 
   .toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
   .toggle input { opacity: 0; width: 0; height: 0; }
@@ -182,7 +160,7 @@
     background: #c8d4e8;
     border-radius: 22px;
     cursor: pointer;
-    transition: background 0.2s;
+    transition: 0.2s;
   }
   .slider::before {
     content: '';
@@ -191,8 +169,7 @@
     left: 3.5px; top: 3.5px;
     background: white;
     border-radius: 50%;
-    transition: transform 0.2s;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+    transition: 0.2s;
   }
   .toggle input:checked + .slider { background: var(--royal); }
   .toggle input:checked + .slider::before { transform: translateX(17px); }
@@ -200,9 +177,9 @@
   .costs-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 12px;
     padding: 16px;
-    background: var(--bg);
+    background: #f8faff;
     border-radius: 10px;
     border: 1.5px dashed rgba(37,99,184,0.2);
     margin-bottom: 16px;
@@ -220,21 +197,9 @@
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    letter-spacing: 0.05em;
     text-transform: uppercase;
-    transition: opacity 0.2s, transform 0.1s;
-    position: relative;
-    overflow: hidden;
+    margin-top: 10px;
   }
-  .btn::after {
-    content: '';
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 3px;
-    background: linear-gradient(90deg, var(--gold), var(--orange));
-  }
-  .btn:hover { opacity: 0.9; }
-  .btn:active { transform: scale(0.98); }
 
   /* RESULTS */
   .results { display: none; }
@@ -245,26 +210,13 @@
     to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Yield Banner */
   .yield-banner {
     background: linear-gradient(135deg, var(--navy) 0%, var(--royal) 100%);
     border-radius: var(--radius);
-    padding: 28px 24px 24px;
+    padding: 28px 24px;
     text-align: center;
     margin-bottom: 12px;
     position: relative;
-    overflow: hidden;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
-
-  .yield-banner::before {
-    content: '';
-    position: absolute;
-    top: -30px; right: -30px;
-    width: 120px; height: 120px;
-    background: rgba(245,166,35,0.1);
-    border-radius: 50%;
   }
 
   .yield-banner::after {
@@ -279,10 +231,9 @@
     font-size: 10px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.55);
+    color: rgba(255,255,255,0.6);
     margin-bottom: 8px;
     font-weight: 600;
-    position: relative;
   }
 
   .yb-number {
@@ -290,7 +241,6 @@
     font-size: 4.5rem;
     line-height: 1;
     color: var(--gold);
-    position: relative;
   }
 
   .yb-verdict {
@@ -302,11 +252,8 @@
     background: rgba(255,255,255,0.12);
     padding: 5px 18px;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.2);
-    position: relative;
   }
 
-  /* Stats */
   .stats-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -319,26 +266,13 @@
     border: 1.5px solid rgba(37,99,184,0.12);
     border-radius: 10px;
     padding: 14px 16px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .stat-box::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0;
-    width: 4px; height: 100%;
-    background: linear-gradient(180deg, var(--gold), var(--orange));
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
   }
 
   .s-label {
-    font-size: 0.68rem;
+    font-size: 0.65rem;
     color: var(--muted);
-    letter-spacing: 0.08em;
     text-transform: uppercase;
-    margin-bottom: 5px;
+    margin-bottom: 4px;
     font-weight: 600;
   }
 
@@ -348,287 +282,208 @@
     color: var(--navy);
   }
 
-  /* Formula */
   .formula-box {
     background: var(--bg);
-    border: 1.5px solid rgba(37,99,184,0.15);
     border-radius: 10px;
-    padding: 16px 18px;
+    padding: 16px;
     font-size: 0.82rem;
     color: var(--muted);
-    line-height: 2;
+    line-height: 1.6;
     margin-bottom: 14px;
   }
-  .formula-box strong { color: var(--navy); }
-  .formula-box .eq { color: var(--royal); font-weight: 700; }
 
-  /* Action Buttons */
+  .formula-box strong { color: var(--navy); }
+
   .action-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
   }
 
-  .btn-reset {
+  .btn-reset, .btn-pdf {
     padding: 12px;
-    background: white;
-    border: 1.5px solid rgba(37,99,184,0.22);
     border-radius: 10px;
-    color: var(--navy);
     font-family: 'DM Sans', sans-serif;
     font-size: 0.8rem;
     font-weight: 700;
     cursor: pointer;
-    letter-spacing: 0.03em;
     text-transform: uppercase;
-    transition: background 0.2s, border-color 0.2s;
   }
-  .btn-reset:hover { background: var(--bg); border-color: var(--royal); }
 
-  .btn-pdf {
-    padding: 12px;
-    background: linear-gradient(135deg, var(--gold), var(--orange));
-    border: none;
-    border-radius: 10px;
-    color: white;
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.8rem;
-    font-weight: 700;
-    cursor: pointer;
-    letter-spacing: 0.03em;
-    text-transform: uppercase;
-    transition: opacity 0.2s;
-  }
-  .btn-pdf:hover { opacity: 0.88; }
+  .btn-reset { background: white; border: 1.5px solid #ccc; color: var(--navy); }
+  .btn-pdf { background: var(--gold); border: none; color: white; }
 
-  /* ── PRINT ── */
-  @media print {
-    @page { margin: 1.2cm; }
-
-    body {
-      background: white !important;
-      padding: 0 !important;
-      display: block !important;
-      min-height: unset !important;
-    }
-
-    .wrapper { max-width: 100% !important; }
-
-    header {
-      border-radius: 0 !important;
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-
-    .card { border-radius: 0 !important; border: 1px solid #dde4ef !important; }
-
-    #inputCard { display: none !important; }
-
-    .results { display: block !important; }
-
-    .yield-banner {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-
-    .stat-box::before {
-      -webkit-print-color-adjust: exact;
-      print-color-adjust: exact;
-    }
-
-    .action-row { display: none !important; }
+  /* INFO TEXT FROM SCREENSHOT */
+  .info-text {
+    font-size: 0.75rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 20px;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
   }
 
   @media (max-width: 420px) {
     .input-row, .costs-grid, .stats-grid, .action-row { grid-template-columns: 1fr; }
-    header h1 { font-size: 1.7rem; }
-    .yb-number { font-size: 3.2rem; }
   }
 </style>
 </head>
 <body>
 <div class="wrapper">
 
-  <!-- Always-visible header -->
   <header>
     <div class="eyebrow">Real Estate Analytics</div>
     <h1>Απόδοση <span>Ακινήτου</span></h1>
-    <p>Rental yield calculator — offline &amp; δωρεάν</p>
+    <p>Υπολογιστής απόδοσης ενοικίασης - ©® GeorgiosGkaripis</p>
   </header>
 
-  <!-- INPUT CARD -->
   <div class="card last" id="inputCard">
     <div class="card-title">Βασικά Στοιχεία</div>
 
     <div class="input-row">
       <div class="field">
-        <label>Μηνιαίο Μίσθωμα</label>
+        <label>Μηνιαίο Μίσθωμα (€)</label>
         <div class="input-wrap">
           <span class="symbol">€</span>
-          <input type="number" id="rent" placeholder="π.χ. 800" min="0">
+          <input type="number" id="rent" placeholder="π.χ. 800">
         </div>
       </div>
       <div class="field">
-        <label>Τιμή Αγοράς</label>
+        <label>Τιμή Αγοράς (€)</label>
         <div class="input-wrap">
           <span class="symbol">€</span>
-          <input type="number" id="price" placeholder="π.χ. 230000" min="0">
+          <input type="number" id="price" placeholder="π.χ. 150000">
         </div>
       </div>
     </div>
 
     <div class="toggle-row">
-      <span class="toggle-label">Συμπερίληψη επιπλέον εξόδων αγοράς</span>
+      <span class="toggle-label">Έξοδα Απόκτησης (Φόροι, Μεσιτικά κ.α.)</span>
       <label class="toggle">
-        <input type="checkbox" id="extraToggle" onchange="toggleExtras(this)">
+        <input type="checkbox" id="extraToggle" onchange="toggleFields('extraFields', this)">
         <span class="slider"></span>
       </label>
     </div>
 
     <div id="extraFields" style="display:none;">
       <div class="costs-grid">
-        <div class="field">
-          <label>Συμβολαιογράφος (€)</label>
-          <div class="input-wrap">
-            <span class="symbol">€</span>
-            <input type="number" id="notary" placeholder="π.χ. 2000" min="0">
-          </div>
-        </div>
-        <div class="field">
-          <label>Μεσιτικά (€)</label>
-          <div class="input-wrap">
-            <span class="symbol">€</span>
-            <input type="number" id="agent" placeholder="π.χ. 4600" min="0">
-          </div>
-        </div>
-        <div class="field">
-          <label>Φόρος Μεταβίβασης (€)</label>
-          <div class="input-wrap">
-            <span class="symbol">€</span>
-            <input type="number" id="tax" placeholder="π.χ. 6900" min="0">
-          </div>
-        </div>
-        <div class="field">
-          <label>Ανακαίνιση (€)</label>
-          <div class="input-wrap">
-            <span class="symbol">€</span>
-            <input type="number" id="renovation" placeholder="π.χ. 5000" min="0">
-          </div>
-        </div>
+        <div class="field"><label>Φόρος Μεταβίβασης</label><input type="number" id="tax" placeholder="0"></div>
+        <div class="field"><label>Μεσιτική Αμοιβή</label><input type="number" id="agent" placeholder="0"></div>
+        <div class="field"><label>Συμβολαιογράφος</label><input type="number" id="notary" placeholder="0"></div>
+        <div class="field"><label>Ανακαίνιση/Επισκευή</label><input type="number" id="renovation" placeholder="0"></div>
       </div>
     </div>
 
-    <button class="btn" onclick="calculate()">Υπολογισμός →</button>
+    <div class="toggle-row">
+      <span class="toggle-label">Ετήσια Λειτουργικά Έξοδα (ΕΝΦΙΑ κ.α.)</span>
+      <label class="toggle">
+        <input type="checkbox" id="opToggle" onchange="toggleFields('opFields', this)">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div id="opFields" style="display:none;">
+      <div class="costs-grid">
+        <div class="field"><label>ΕΝΦΙΑ (Ετήσιος)</label><input type="number" id="enfia" placeholder="0"></div>
+        <div class="field"><label>Ασφάλεια/Συντήρηση</label><input type="number" id="maintenance" placeholder="0"></div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Υπολογισμός Απόδοσης →</button>
+
+    <div class="info-text">
+        <strong>Τύπος:</strong> Απόδοση = (Καθαρά Ετήσια Έσοδα / Συνολικό Κόστος Αγοράς) × 100<br><br>
+        <em>* Τα καθαρά έσοδα προκύπτουν μετά την αφαίρεση εξόδων όπως ΕΝΦΙΑ, ασφάλεια και συντήρηση.</em>
+    </div>
   </div>
 
-  <!-- RESULTS CARD -->
   <div class="card last results" id="results">
-
     <div class="yield-banner">
       <div class="yb-label">Καθαρή Ετήσια Απόδοση</div>
-      <div class="yb-number" id="yieldNum">—</div>
-      <br>
+      <div class="yb-number" id="yieldNum">0%</div>
       <span class="yb-verdict" id="verdict"></span>
     </div>
 
     <div class="stats-grid">
       <div class="stat-box">
-        <div class="s-label">Ετήσιο Μίσθωμα</div>
-        <div class="s-value" id="annualRent">—</div>
+        <div class="s-label">Καθαρά Ετήσια Έσοδα</div>
+        <div class="s-value" id="resNetIncome">—</div>
       </div>
       <div class="stat-box">
         <div class="s-label">Συνολικό Κόστος</div>
-        <div class="s-value" id="totalCost">—</div>
-      </div>
-      <div class="stat-box">
-        <div class="s-label">Χρόνια Απόσβεσης</div>
-        <div class="s-value" id="payback">—</div>
-      </div>
-      <div class="stat-box">
-        <div class="s-label">Μηνιαία Απόδοση</div>
-        <div class="s-value" id="monthlyYield">—</div>
+        <div class="s-value" id="resTotalCost">—</div>
       </div>
     </div>
 
     <div class="formula-box" id="formulaBox"></div>
 
     <div class="action-row">
-      <button class="btn-reset" onclick="reset()">← Νέος Υπολογισμός</button>
-      <button class="btn-pdf" onclick="savePDF()">⬇ Αποθήκευση PDF</button>
+      <button class="btn-reset" onclick="reset()">← Νέα Ανάλυση</button>
+      <button class="btn-pdf" onclick="window.print()">⬇ PDF / Εκτύπωση</button>
     </div>
-
   </div>
 </div>
 
 <script>
-  function toggleExtras(cb) {
-    document.getElementById('extraFields').style.display = cb.checked ? 'block' : 'none';
+  function toggleFields(id, cb) {
+    document.getElementById(id).style.display = cb.checked ? 'block' : 'none';
   }
 
   function fmt(n) {
-    return n.toLocaleString('el-GR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
+    return n.toLocaleString('el-GR') + ' €';
   }
 
   function calculate() {
-    const rent  = parseFloat(document.getElementById('rent').value)  || 0;
+    const rent = parseFloat(document.getElementById('rent').value) || 0;
     const price = parseFloat(document.getElementById('price').value) || 0;
 
-    if (!rent || !price) {
-      alert('Παρακαλώ συμπλήρωσε τουλάχιστον το μίσθωμα και την τιμή αγοράς.');
+    if (rent <= 0 || price <= 0) {
+      alert("Παρακαλώ εισάγετε ενοίκιο και τιμή αγοράς.");
       return;
     }
 
-    const hasExtras = document.getElementById('extraToggle').checked;
-    const notary    = parseFloat(document.getElementById('notary').value)     || 0;
-    const agent     = parseFloat(document.getElementById('agent').value)      || 0;
-    const tax       = parseFloat(document.getElementById('tax').value)        || 0;
-    const reno      = parseFloat(document.getElementById('renovation').value) || 0;
-    const extras    = hasExtras ? (notary + agent + tax + reno) : 0;
+    // Έξοδα Απόκτησης
+    const tax = parseFloat(document.getElementById('tax').value) || 0;
+    const agent = parseFloat(document.getElementById('agent').value) || 0;
+    const notary = parseFloat(document.getElementById('notary').value) || 0;
+    const reno = parseFloat(document.getElementById('renovation').value) || 0;
+    const totalAcquisitionCosts = tax + agent + notary + reno;
+    const totalInvestment = price + totalAcquisitionCosts;
 
-    const annual       = rent * 12;
-    const total        = price + extras;
-    const yieldPct     = (annual / total) * 100;
-    const paybackYears = total / annual;
-    const monthlyPct   = yieldPct / 12;
+    // Λειτουργικά Έξοδα (Ετήσια)
+    const enfia = parseFloat(document.getElementById('enfia').value) || 0;
+    const maint = parseFloat(document.getElementById('maintenance').value) || 0;
+    const annualOpExpenses = enfia + maint;
 
-    let verdict;
-    if (yieldPct >= 6)      verdict = '✅ Εξαιρετική επένδυση (≥6%)';
-    else if (yieldPct >= 4) verdict = '🟡 Καλή επένδυση (4–6%)';
-    else                    verdict = '🔴 Χαμηλή απόδοση (<4%)';
+    // Έσοδα
+    const grossAnnual = rent * 12;
+    const netAnnual = grossAnnual - annualOpExpenses;
 
-    document.getElementById('yieldNum').textContent     = yieldPct.toFixed(1) + '%';
-    document.getElementById('verdict').textContent      = verdict;
-    document.getElementById('annualRent').textContent   = fmt(annual);
-    document.getElementById('totalCost').textContent    = fmt(total);
-    document.getElementById('payback').textContent      = paybackYears.toFixed(1) + ' χρόνια';
-    document.getElementById('monthlyYield').textContent = monthlyPct.toFixed(2) + '%';
+    // Απόδοση
+    const yieldPct = (netAnnual / totalInvestment) * 100;
 
-    let html = `<strong>Μίσθωμα/μήνα:</strong> ${fmt(rent)} × 12 = <span class="eq">${fmt(annual)}/χρόνο</span><br>`;
-    html    += `<strong>Τιμή αγοράς:</strong> ${fmt(price)}`;
-    if (extras > 0) {
-      html += `<br><strong>Επιπλέον έξοδα:</strong> ${fmt(extras)}`;
-      html += `<br><strong>Συνολικό κόστος:</strong> ${fmt(price)} + ${fmt(extras)} = <span class="eq">${fmt(total)}</span>`;
-    }
-    html += `<br><br><strong>Απόδοση =</strong> ${fmt(annual)} ÷ ${fmt(total)} = <span class="eq">${yieldPct.toFixed(3)}% → ${yieldPct.toFixed(1)}%</span>`;
-    document.getElementById('formulaBox').innerHTML = html;
+    // UI Update
+    document.getElementById('yieldNum').textContent = yieldPct.toFixed(1) + '%';
+    document.getElementById('resNetIncome').textContent = fmt(netAnnual);
+    document.getElementById('resTotalCost').textContent = fmt(totalInvestment);
+
+    let verdict = yieldPct >= 6 ? '✅ Εξαιρετική Απόδοση' : (yieldPct >= 4 ? '🟡 Ικανοποιητική Απόδοση' : '🔴 Χαμηλή Απόδοση');
+    document.getElementById('verdict').textContent = verdict;
+
+    let formula = `<strong>Ανάλυση:</strong><br>`;
+    formula += `Έσοδα: ${fmt(grossAnnual)} - Έξοδα: ${fmt(annualOpExpenses)} = <strong>${fmt(netAnnual)}</strong> (Καθαρά)<br>`;
+    formula += `Επένδυση: ${fmt(price)} + Έξοδα Αγοράς: ${fmt(totalAcquisitionCosts)} = <strong>${fmt(totalInvestment)}</strong>`;
+    document.getElementById('formulaBox').innerHTML = formula;
 
     document.getElementById('inputCard').style.display = 'none';
-    const res = document.getElementById('results');
-    res.style.display = 'block';
-    res.classList.add('show');
+    document.getElementById('results').style.display = 'block';
+    document.getElementById('results').classList.add('show');
   }
 
   function reset() {
-    const res = document.getElementById('results');
-    res.style.display = 'none';
-    res.classList.remove('show');
+    document.getElementById('results').style.display = 'none';
     document.getElementById('inputCard').style.display = 'block';
-  }
-
-  function savePDF() {
-    window.print();
   }
 </script>
 </body>
-
 </html>
