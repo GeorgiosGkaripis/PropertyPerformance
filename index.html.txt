@@ -1,0 +1,633 @@
+
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Απόδοση Ακινήτου</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy:   #1a3a6b;
+    --royal:  #2563b8;
+    --gold:   #f5a623;
+    --orange: #e8722a;
+    --white:  #ffffff;
+    --bg:     #e8eef7;
+    --card:   #ffffff;
+    --text:   #1a2540;
+    --muted:  #5a6a8a;
+    --radius: 14px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 32px 16px 48px;
+  }
+
+  .wrapper { width: 100%; max-width: 560px; }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--royal) 100%);
+    border-radius: var(--radius) var(--radius) 0 0;
+    padding: 28px 32px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 160px; height: 160px;
+    background: rgba(245,166,35,0.08);
+    border-radius: 50%;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--orange));
+  }
+
+  header .eyebrow {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+    font-weight: 600;
+    position: relative;
+  }
+
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.1rem;
+    color: var(--white);
+    line-height: 1.15;
+    position: relative;
+  }
+
+  header h1 span { color: var(--gold); }
+
+  header p {
+    color: rgba(255,255,255,0.55);
+    font-size: 0.8rem;
+    margin-top: 6px;
+    position: relative;
+  }
+
+  /* CARDS */
+  .card {
+    background: var(--card);
+    border: 1px solid rgba(37,99,184,0.1);
+    border-top: none;
+    padding: 24px 28px;
+  }
+
+  .card.last { border-radius: 0 0 var(--radius) var(--radius); }
+
+  .card-title {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--royal);
+    font-weight: 700;
+    margin-bottom: 18px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--bg);
+  }
+
+  /* INPUTS */
+  .input-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+  }
+
+  .field { display: flex; flex-direction: column; gap: 6px; }
+
+  label {
+    font-size: 0.73rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+  }
+
+  .input-wrap { position: relative; }
+
+  .input-wrap .symbol {
+    position: absolute;
+    left: 12px; top: 50%;
+    transform: translateY(-50%);
+    color: var(--muted);
+    font-size: 0.88rem;
+    pointer-events: none;
+    font-weight: 700;
+  }
+
+  input[type=number] {
+    width: 100%;
+    padding: 11px 12px 11px 28px;
+    background: var(--bg);
+    border: 1.5px solid rgba(37,99,184,0.18);
+    border-radius: 8px;
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s, background 0.2s;
+    -moz-appearance: textfield;
+  }
+  input[type=number]::-webkit-inner-spin-button,
+  input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+  input[type=number]:focus {
+    border-color: var(--royal);
+    box-shadow: 0 0 0 3px rgba(37,99,184,0.1);
+    background: white;
+  }
+
+  /* TOGGLE */
+  .toggle-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin-bottom: 16px;
+    gap: 12px;
+  }
+
+  .toggle-label { font-size: 0.8rem; color: var(--muted); font-weight: 500; }
+
+  .toggle { position: relative; width: 40px; height: 22px; flex-shrink: 0; }
+  .toggle input { opacity: 0; width: 0; height: 0; }
+
+  .slider {
+    position: absolute; inset: 0;
+    background: #c8d4e8;
+    border-radius: 22px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .slider::before {
+    content: '';
+    position: absolute;
+    width: 15px; height: 15px;
+    left: 3.5px; top: 3.5px;
+    background: white;
+    border-radius: 50%;
+    transition: transform 0.2s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.25);
+  }
+  .toggle input:checked + .slider { background: var(--royal); }
+  .toggle input:checked + .slider::before { transform: translateX(17px); }
+
+  .costs-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    padding: 16px;
+    background: var(--bg);
+    border-radius: 10px;
+    border: 1.5px dashed rgba(37,99,184,0.2);
+    margin-bottom: 16px;
+  }
+
+  /* CALC BUTTON */
+  .btn {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--royal) 100%);
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    transition: opacity 0.2s, transform 0.1s;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--orange));
+  }
+  .btn:hover { opacity: 0.9; }
+  .btn:active { transform: scale(0.98); }
+
+  /* RESULTS */
+  .results { display: none; }
+  .results.show { display: block; animation: fadeUp 0.35s ease; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Yield Banner */
+  .yield-banner {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--royal) 100%);
+    border-radius: var(--radius);
+    padding: 28px 24px 24px;
+    text-align: center;
+    margin-bottom: 12px;
+    position: relative;
+    overflow: hidden;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .yield-banner::before {
+    content: '';
+    position: absolute;
+    top: -30px; right: -30px;
+    width: 120px; height: 120px;
+    background: rgba(245,166,35,0.1);
+    border-radius: 50%;
+  }
+
+  .yield-banner::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--gold), var(--orange));
+  }
+
+  .yb-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 8px;
+    font-weight: 600;
+    position: relative;
+  }
+
+  .yb-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 4.5rem;
+    line-height: 1;
+    color: var(--gold);
+    position: relative;
+  }
+
+  .yb-verdict {
+    display: inline-block;
+    margin-top: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: white;
+    background: rgba(255,255,255,0.12);
+    padding: 5px 18px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.2);
+    position: relative;
+  }
+
+  /* Stats */
+  .stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .stat-box {
+    background: white;
+    border: 1.5px solid rgba(37,99,184,0.12);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .stat-box::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 4px; height: 100%;
+    background: linear-gradient(180deg, var(--gold), var(--orange));
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .s-label {
+    font-size: 0.68rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    font-weight: 600;
+  }
+
+  .s-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--navy);
+  }
+
+  /* Formula */
+  .formula-box {
+    background: var(--bg);
+    border: 1.5px solid rgba(37,99,184,0.15);
+    border-radius: 10px;
+    padding: 16px 18px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 2;
+    margin-bottom: 14px;
+  }
+  .formula-box strong { color: var(--navy); }
+  .formula-box .eq { color: var(--royal); font-weight: 700; }
+
+  /* Action Buttons */
+  .action-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .btn-reset {
+    padding: 12px;
+    background: white;
+    border: 1.5px solid rgba(37,99,184,0.22);
+    border-radius: 10px;
+    color: var(--navy);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    transition: background 0.2s, border-color 0.2s;
+  }
+  .btn-reset:hover { background: var(--bg); border-color: var(--royal); }
+
+  .btn-pdf {
+    padding: 12px;
+    background: linear-gradient(135deg, var(--gold), var(--orange));
+    border: none;
+    border-radius: 10px;
+    color: white;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    transition: opacity 0.2s;
+  }
+  .btn-pdf:hover { opacity: 0.88; }
+
+  /* ── PRINT ── */
+  @media print {
+    @page { margin: 1.2cm; }
+
+    body {
+      background: white !important;
+      padding: 0 !important;
+      display: block !important;
+      min-height: unset !important;
+    }
+
+    .wrapper { max-width: 100% !important; }
+
+    header {
+      border-radius: 0 !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .card { border-radius: 0 !important; border: 1px solid #dde4ef !important; }
+
+    #inputCard { display: none !important; }
+
+    .results { display: block !important; }
+
+    .yield-banner {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .stat-box::before {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .action-row { display: none !important; }
+  }
+
+  @media (max-width: 420px) {
+    .input-row, .costs-grid, .stats-grid, .action-row { grid-template-columns: 1fr; }
+    header h1 { font-size: 1.7rem; }
+    .yb-number { font-size: 3.2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <!-- Always-visible header -->
+  <header>
+    <div class="eyebrow">Real Estate Analytics</div>
+    <h1>Απόδοση <span>Ακινήτου</span></h1>
+    <p>Rental yield calculator — offline &amp; δωρεάν</p>
+  </header>
+
+  <!-- INPUT CARD -->
+  <div class="card last" id="inputCard">
+    <div class="card-title">Βασικά Στοιχεία</div>
+
+    <div class="input-row">
+      <div class="field">
+        <label>Μηνιαίο Μίσθωμα</label>
+        <div class="input-wrap">
+          <span class="symbol">€</span>
+          <input type="number" id="rent" placeholder="π.χ. 800" min="0">
+        </div>
+      </div>
+      <div class="field">
+        <label>Τιμή Αγοράς</label>
+        <div class="input-wrap">
+          <span class="symbol">€</span>
+          <input type="number" id="price" placeholder="π.χ. 230000" min="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <span class="toggle-label">Συμπερίληψη επιπλέον εξόδων αγοράς</span>
+      <label class="toggle">
+        <input type="checkbox" id="extraToggle" onchange="toggleExtras(this)">
+        <span class="slider"></span>
+      </label>
+    </div>
+
+    <div id="extraFields" style="display:none;">
+      <div class="costs-grid">
+        <div class="field">
+          <label>Συμβολαιογράφος (€)</label>
+          <div class="input-wrap">
+            <span class="symbol">€</span>
+            <input type="number" id="notary" placeholder="π.χ. 2000" min="0">
+          </div>
+        </div>
+        <div class="field">
+          <label>Μεσιτικά (€)</label>
+          <div class="input-wrap">
+            <span class="symbol">€</span>
+            <input type="number" id="agent" placeholder="π.χ. 4600" min="0">
+          </div>
+        </div>
+        <div class="field">
+          <label>Φόρος Μεταβίβασης (€)</label>
+          <div class="input-wrap">
+            <span class="symbol">€</span>
+            <input type="number" id="tax" placeholder="π.χ. 6900" min="0">
+          </div>
+        </div>
+        <div class="field">
+          <label>Ανακαίνιση (€)</label>
+          <div class="input-wrap">
+            <span class="symbol">€</span>
+            <input type="number" id="renovation" placeholder="π.χ. 5000" min="0">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn" onclick="calculate()">Υπολογισμός →</button>
+  </div>
+
+  <!-- RESULTS CARD -->
+  <div class="card last results" id="results">
+
+    <div class="yield-banner">
+      <div class="yb-label">Καθαρή Ετήσια Απόδοση</div>
+      <div class="yb-number" id="yieldNum">—</div>
+      <br>
+      <span class="yb-verdict" id="verdict"></span>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="s-label">Ετήσιο Μίσθωμα</div>
+        <div class="s-value" id="annualRent">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="s-label">Συνολικό Κόστος</div>
+        <div class="s-value" id="totalCost">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="s-label">Χρόνια Απόσβεσης</div>
+        <div class="s-value" id="payback">—</div>
+      </div>
+      <div class="stat-box">
+        <div class="s-label">Μηνιαία Απόδοση</div>
+        <div class="s-value" id="monthlyYield">—</div>
+      </div>
+    </div>
+
+    <div class="formula-box" id="formulaBox"></div>
+
+    <div class="action-row">
+      <button class="btn-reset" onclick="reset()">← Νέος Υπολογισμός</button>
+      <button class="btn-pdf" onclick="savePDF()">⬇ Αποθήκευση PDF</button>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function toggleExtras(cb) {
+    document.getElementById('extraFields').style.display = cb.checked ? 'block' : 'none';
+  }
+
+  function fmt(n) {
+    return n.toLocaleString('el-GR', { minimumFractionDigits: 0, maximumFractionDigits: 0 }) + ' €';
+  }
+
+  function calculate() {
+    const rent  = parseFloat(document.getElementById('rent').value)  || 0;
+    const price = parseFloat(document.getElementById('price').value) || 0;
+
+    if (!rent || !price) {
+      alert('Παρακαλώ συμπλήρωσε τουλάχιστον το μίσθωμα και την τιμή αγοράς.');
+      return;
+    }
+
+    const hasExtras = document.getElementById('extraToggle').checked;
+    const notary    = parseFloat(document.getElementById('notary').value)     || 0;
+    const agent     = parseFloat(document.getElementById('agent').value)      || 0;
+    const tax       = parseFloat(document.getElementById('tax').value)        || 0;
+    const reno      = parseFloat(document.getElementById('renovation').value) || 0;
+    const extras    = hasExtras ? (notary + agent + tax + reno) : 0;
+
+    const annual       = rent * 12;
+    const total        = price + extras;
+    const yieldPct     = (annual / total) * 100;
+    const paybackYears = total / annual;
+    const monthlyPct   = yieldPct / 12;
+
+    let verdict;
+    if (yieldPct >= 6)      verdict = '✅ Εξαιρετική επένδυση (≥6%)';
+    else if (yieldPct >= 4) verdict = '🟡 Καλή επένδυση (4–6%)';
+    else                    verdict = '🔴 Χαμηλή απόδοση (<4%)';
+
+    document.getElementById('yieldNum').textContent     = yieldPct.toFixed(1) + '%';
+    document.getElementById('verdict').textContent      = verdict;
+    document.getElementById('annualRent').textContent   = fmt(annual);
+    document.getElementById('totalCost').textContent    = fmt(total);
+    document.getElementById('payback').textContent      = paybackYears.toFixed(1) + ' χρόνια';
+    document.getElementById('monthlyYield').textContent = monthlyPct.toFixed(2) + '%';
+
+    let html = `<strong>Μίσθωμα/μήνα:</strong> ${fmt(rent)} × 12 = <span class="eq">${fmt(annual)}/χρόνο</span><br>`;
+    html    += `<strong>Τιμή αγοράς:</strong> ${fmt(price)}`;
+    if (extras > 0) {
+      html += `<br><strong>Επιπλέον έξοδα:</strong> ${fmt(extras)}`;
+      html += `<br><strong>Συνολικό κόστος:</strong> ${fmt(price)} + ${fmt(extras)} = <span class="eq">${fmt(total)}</span>`;
+    }
+    html += `<br><br><strong>Απόδοση =</strong> ${fmt(annual)} ÷ ${fmt(total)} = <span class="eq">${yieldPct.toFixed(3)}% → ${yieldPct.toFixed(1)}%</span>`;
+    document.getElementById('formulaBox').innerHTML = html;
+
+    document.getElementById('inputCard').style.display = 'none';
+    const res = document.getElementById('results');
+    res.style.display = 'block';
+    res.classList.add('show');
+  }
+
+  function reset() {
+    const res = document.getElementById('results');
+    res.style.display = 'none';
+    res.classList.remove('show');
+    document.getElementById('inputCard').style.display = 'block';
+  }
+
+  function savePDF() {
+    window.print();
+  }
+</script>
+</body>
+</html>
