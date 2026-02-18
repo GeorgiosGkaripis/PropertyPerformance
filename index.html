@@ -34,6 +34,7 @@
 
   .wrapper { width: 100%; max-width: 560px; }
 
+  /* HEADER */
   header {
     background: linear-gradient(135deg, var(--navy) 0%, var(--royal) 100%);
     border-radius: var(--radius) var(--radius) 0 0;
@@ -73,14 +74,21 @@
     font-size: 0.85rem;
     margin-top: 6px;
     font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 4px;
   }
 
-  .copy-symbol {
-    font-size: 1rem;
+  /* ΔΙΟΡΘΩΣΗ ΓΙΑ ΤΑ ΣΥΜΒΟΛΑ */
+  .copy-reg {
+    font-size: 1.1rem; /* Ίδιο μέγεθος και για τα δύο */
+    display: inline-flex;
+    line-height: 1;
     vertical-align: middle;
-    line-height: 0;
+    font-family: sans-serif; /* Standard font για ομοιομορφία στα σύμβολα */
   }
 
+  /* CARDS & INPUTS */
   .card {
     background: var(--card);
     border: 1px solid rgba(37,99,184,0.1);
@@ -142,6 +150,7 @@
     outline: none;
   }
 
+  /* TOGGLES & BOXES */
   .toggle-row {
     display: flex;
     align-items: center;
@@ -203,6 +212,7 @@
     margin-top: 10px;
   }
 
+  /* RESULTS */
   .results { display: none; }
   .results.show { display: block; animation: fadeUp 0.35s ease; }
 
@@ -255,7 +265,6 @@
   .s-label { font-size: 0.65rem; color: var(--muted); text-transform: uppercase; margin-bottom: 4px; font-weight: 600; }
   .s-value { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
 
-  /* ANALYSIS BOX (SCREENSHOT 4 STYLE) */
   .formula-box {
     background: #f0f4fa;
     border-radius: 10px;
@@ -299,12 +308,11 @@
   <header>
     <div class="eyebrow">Real Estate Analytics</div>
     <h1>Απόδοση <span>Ακινήτου</span></h1>
-    <p>Υπολογιστής απόδοσης ενοικίασης - <span class="copy-symbol">©®</span> GeorgiosGkaripis</p>
+    <p>Υπολογιστής απόδοσης ενοικίασης - <span class="copy-reg">&copy;&reg;</span> GeorgiosGkaripis</p>
   </header>
 
   <div class="card last" id="inputCard">
     <div class="card-title">Βασικά Στοιχεία</div>
-
     <div class="input-row">
       <div class="field">
         <label>Μηνιαίο Μίσθωμα (€)</label>
@@ -416,7 +424,6 @@
     document.getElementById('resTotalCost').textContent = fmt(totalCost);
     document.getElementById('verdict').textContent = yieldPct >= 6 ? '✅ Εξαιρετική Απόδοση' : (yieldPct >= 4 ? '🟡 Ικανοποιητική Απόδοση' : '🔴 Χαμηλή Απόδοση');
 
-    // ANALYSIS GENERATION (Screenshot 4 Style)
     let html = `<strong>Μίσθωμα/μήνα:</strong> ${fmt(rent)} × 12 = <span class="highlight">${fmt(annualRent)}/χρόνο</span><br>`;
     if (opExpenses > 0) {
         html += `<strong>Λειτουργικά έξοδα:</strong> - ${fmt(opExpenses)}<br>`;
